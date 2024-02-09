@@ -34,10 +34,4 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* FollowCamera;
 
-	UPROPERTY(VisibleAnywhere, Category = Hair)
-	class UGroomComponent* Hair;
-	
-	UPROPERTY(VisibleAnywhere, Category = Hair)
-	class UGroomComponent* Eyebrows;
-
 };
