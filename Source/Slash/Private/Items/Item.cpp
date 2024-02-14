@@ -6,6 +6,9 @@ AItem::AItem()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMeshComponent"));
+	RootComponent = ItemMesh;
+
 }
 
 void AItem::BeginPlay()
@@ -14,16 +17,21 @@ void AItem::BeginPlay()
 
 }
 
+float AItem::TransformedSin()
+{
+	return Amplitude * FMath::Sin(RunningTime * TimeConstant);
+}
+
+float AItem::TransformedCos()
+{
+	return Amplitude * FMath::Cos(RunningTime * TimeConstant);
+}
+
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//Movement rate in units of cm/s
-	float MovementRate = 50.f;
-	float RotationRate = 45.f;
+	RunningTime += DeltaTime;
 
-	//MovementRate * DeltaTime (cm/s) * (s/frame) = (cm/frame)
-	AddActorWorldOffset(FVector(MovementRate * DeltaTime, 0.f, 0.f));
-	AddActorWorldRotation(FRotator(0.f, RotationRate * DeltaTime, 0.f));
 }
 

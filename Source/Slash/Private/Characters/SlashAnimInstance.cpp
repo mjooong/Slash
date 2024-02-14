@@ -27,3 +27,4 @@ void USlashAnimInstance::NativeUpdateAnimation(float DeltaTime)
 		IsFalling = SlashCharacterMovement->IsFalling();
 	}
 }
+ 
