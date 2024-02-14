@@ -35,6 +35,7 @@ void ASlashCharacter::BeginPlay()
 {
 	Super::BeginPlay(); 
 	
+	GetMesh()->HideBoneByName(TEXT("weapon"), EPhysBodyOp::PBO_None);
 } 
 
 // Called every frame
