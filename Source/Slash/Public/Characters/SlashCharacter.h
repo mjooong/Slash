@@ -34,7 +34,6 @@ protected:
 	void FKeyPressed();
 
 private:
-	UPROPERTY(EditAnywhere)
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
 
 	UPROPERTY(VisibleAnywhere)
