@@ -16,16 +16,20 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
+	// Axis Mappings
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void LookUp(float Value);
 	void Turn(float Value);
+
+	// Action Mappings
+	void FKeyPressed();
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -33,5 +37,11 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* FollowCamera;
+
+	UPROPERTY(VisibleInstanceOnly)
+	class AItem* OverlappingItem;
+
+public:
+	FORCEINLINE void SetOverlappingItem(AItem* Item) { OverlappingItem = Item; }
 
 };

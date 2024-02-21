@@ -5,6 +5,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Items/Item.h"
+#include "Items/Weapons/Weapon.h"
 
 // Sets default values
 ASlashCharacter::ASlashCharacter()
@@ -50,12 +52,16 @@ void ASlashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	// Axis Mappings
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ASlashCharacter::MoveForward);
 	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &ASlashCharacter::MoveRight);
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &ASlashCharacter::LookUp);
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ASlashCharacter::Turn);
 
+	// Action Mappings
 	PlayerInputComponent->BindAction(TEXT("Jump"), IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction(TEXT("InteractionKey"), IE_Pressed, this, &ASlashCharacter::FKeyPressed);
+
 }
 
 void ASlashCharacter::MoveForward(float Value)
@@ -85,5 +91,14 @@ void ASlashCharacter::LookUp(float Value)
 void ASlashCharacter::Turn(float Value)
 {
 	AddControllerYawInput(Value);
+}
+
+void ASlashCharacter::FKeyPressed()
+{
+	AWeapon* OverlappingWeapon = Cast<AWeapon>(OverlappingItem);
+	if (OverlappingWeapon)
+	{
+		OverlappingWeapon->Equip(GetMesh(), FName("hand_rSocket"));
+	}
 }
 
