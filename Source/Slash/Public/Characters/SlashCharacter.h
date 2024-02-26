@@ -32,6 +32,7 @@ protected:
 
 	// Action Mappings
 	void FKeyPressed();
+	void Attack();
 
 private:
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
@@ -44,6 +45,12 @@ private:
 
 	UPROPERTY(VisibleInstanceOnly)
 	class AItem* OverlappingItem;
+
+	/**
+	Animation Montages
+	*/
+	UPROPERTY(EditDefaultsOnly, Category=Montages)
+	UAnimMontage* AttackMontage;
 
 public:
 	FORCEINLINE void SetOverlappingItem(AItem* Item) { OverlappingItem = Item; }
