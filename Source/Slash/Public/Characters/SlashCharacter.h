@@ -24,18 +24,24 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
-	// Axis Mappings
+	/*
+	* Callbacks for input
+	*/
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void LookUp(float Value);
 	void Turn(float Value);
-
-	// Action Mappings
 	void FKeyPressed();
 	void Attack();
 
+
+	/*
+	* Play Montage Functions
+	*/
+	void PlayAttackMontage();
 private:
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
+	EActionState ActionState = EActionState::EAS_Unoccupied;
 
 	UPROPERTY(VisibleAnywhere)
 	class USpringArmComponent* CameraBoom;
