@@ -72,17 +72,24 @@ void ASlashCharacter::MoveForward(float Value)
 	//const FRotator ControlRotation = GetControlRotation();
 	//const FRotator YawRotation(0.f, ControlRotation.Yaw, 0.f);
 	//const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-
-	FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::X);
-	AddMovementInput(Direction, Value);
-
+	if (ActionState == EActionState::EAS_Attacking) return;
+	if (Controller && (Value != 0.f))
+	{
+		FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::X);
+		AddMovementInput(Direction, Value);
+	}
 }
 
 void ASlashCharacter::MoveRight(float Value)
 {
 	// Find out which way is right
-	FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::Y);
-	AddMovementInput(Direction, Value);
+	if (ActionState == EActionState::EAS_Attacking) return;
+
+	if (Controller && (Value != 0.f))
+	{
+		FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::Y);
+		AddMovementInput(Direction, Value);
+	}
 }
 
 void ASlashCharacter::LookUp(float Value)
